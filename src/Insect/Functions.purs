@@ -49,7 +49,7 @@ fromFahrenheit tempFahrenheit' = do
   pure $ ((tempFahrenheit + offsetFahrenheit) * multiplierFahrenheit) .* Q.kelvin
 
 -- | Convert a quantity in Kelvin (K) to a scalar that can be interpreted as
--- | the value in degree Celsius (°C).
+-- | the value in degree Fahrenheit (°F).
 -- | Type signature in physical units: kelvin => scalar
 toFahrenheit ∷ Quantity → Either ConversionError Quantity
 toFahrenheit tempKelvin' = do
