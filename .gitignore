@@ -1,0 +1,5 @@
+node_modules/
+output/
+.spago/
+.DS_Store
+npm-debug.log*
