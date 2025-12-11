@@ -80,12 +80,14 @@ async function startInsect() {
     var historyFd = fs.openSync(path.join(xdgBasedir.xdgData, "insect-history"), 'a+');
 
     var maxHistoryLength = 5000;
+    var historyEntries = fs.readFileSync(historyFd, "utf8").split("\n").slice(0, -1);
+    var lastSavedHistoryEntry = historyEntries[historyEntries.length - 1];
 
     // Set up REPL
     var rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
-      history: fs.readFileSync(historyFd, "utf8").split("\n").slice(0, -1).reverse().slice(0, maxHistoryLength),
+      history: historyEntries.reverse().slice(0, maxHistoryLength),
       historySize: maxHistoryLength,
       completer: function(line) {
         var identifiers = Insect.identifiers(insectEnv);
@@ -112,6 +114,10 @@ async function startInsect() {
     // older versions of node:
     rl.setPrompt(prompt, 4);
 
+    // `createWriteStream` doesn't care about the first argument if it's given
+    // `fd`.
+    var historyStream = fs.createWriteStream(undefined, {fd: historyFd});
+
     rl.on('line', function(line) {
       var res = runInsect(Insect.fmtConsole, line);
 
@@ -130,31 +136,17 @@ async function startInsect() {
         } else {
           console.log(res.msg + "\n");
         }
+
+        if (line && line !== lastSavedHistoryEntry) {
+          historyStream.write(line + "\n");
+          lastSavedHistoryEntry = line;
+        }
       }
 
       rl.prompt();
     }).on('close', function() {
       process.exit(0);
     });
-
-    // `createWriteStream` doesn't care about the first argument if it's given
-    // `fd`.
-    var historyStream = fs.createWriteStream(undefined, {fd: historyFd});
-
-    var oldAddHistory = rl._addHistory;
-
-    // TODO: figure out how to do this without resorting to Node.js internals.
-    rl._addHistory = function() {
-      var last = rl.history[0];
-
-      var line = oldAddHistory.call(rl);
-
-      if (line && line !== last) {
-        historyStream.write(line + "\n");
-      }
-
-      return line;
-    };
 
     rl.prompt();
   } else {
