@@ -1,135 +1,72 @@
-html {
-    font-family: 'Exo 2', sans-serif;
-    background-color: #ECF0F1;
-}
-
-.github-corner svg {
-    fill: #272822;
-    color: #ECF0F1;
+:root {
+  color-scheme: light dark;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    font-size: 1.2em;
-    margin: 0px;
-    margin-top: 18px;
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #f2f4f8;
 }
 
-#content {
-    max-width: 90%;
-    width: 850px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
+.calculator {
+  width: min(92vw, 340px);
+  background: #1f2937;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 h1 {
-    font-weight: 400;
-    font-size: 3em;
-    line-height: 100%;
-    margin-bottom: 0;
-    padding: 0;
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  color: #f8fafc;
+  text-align: center;
 }
 
-p.desc {
-    margin-top: 0.6em;
-    margin-bottom: 1.8em;
+#display {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.7rem;
+  text-align: right;
+  background: #111827;
+  color: #f8fafc;
 }
 
-#terminal {
-    border-radius: 4px;
-    box-shadow: 0px 3px 8px #1a1a1a;
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.55rem;
 }
 
-/* jQuery Terminal */
-
-.terminal {
-    --color: #F8F8F2;
-    --background: #272822;
-    --size: 1.6;
-    --link-color: #F8F8F2;
-    font-family: 'Fira Mono', monospace;
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  background: #374151;
+  color: #f8fafc;
 }
 
-.terminal, .terminal .terminal-fill {
-    padding: 1.2em;
-    margin-bottom: 2em;
+button:hover {
+  filter: brightness(1.12);
 }
 
-.terminal,
-.terminal-output > :not(.raw) span,
-.terminal-output > :not(.raw) a,
-.terminal-output > :not(.raw) div,
-.cmd,
-.cmd span,
-.cmd div {
-    font-family: 'Fira Mono', monospace;
+button:active {
+  transform: translateY(1px);
 }
 
-.terminal-output > div {
-    padding-bottom: 1em;
+.wide {
+  grid-column: span 2;
 }
 
-.terminal-output > div.terminal-command {
-    padding-bottom: 0em;
-}
-
-.prompt {
-    font-weight: bold;
-    /* workaround for https://github.com/sharkdp/insect/issues/78 */
-    letter-spacing: 1px;
-}
-
-/* syntax highlighting */
-
-.hl-emphasized {
-    font-weight: 700 !important;
-}
-
-.hl-error {
-    color: #F92672 !important;
-}
-
-.hl-value {
-    color: #66D9EF !important;
-}
-
-.hl-identifier {
-    color: #FD971F !important;
-}
-
-.hl-function {
-    font-style: italic !important;
-}
-
-.hl-unit {
-    color: #A6E22E !important;
-}
-
-/* Github Badge */
-
-.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
-
-@media (prefers-color-scheme: dark) {
-    html {
-        background: #1A1A1A;
-        color: #ECF0F1;
-    }
-
-    .github-corner svg {
-        fill: #ECF0F1;
-        color: #1A1A1A;
-    }
-
-    #terminal {
-        box-shadow: 0px 3px 8px #121212;
-    }
-
-    #insect-logo {
-        color: black;
-        filter: drop-shadow(0 0 10px #ECF0F1);
-    }
-
-    #insect-logo > path {
-        display: none;
-    }
+.accent {
+  background: #2563eb;
 }
