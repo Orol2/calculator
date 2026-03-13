@@ -1,0 +1,12 @@
+{
+  "name": "fertility-tracker-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Telegram mini app webhook for fertility tracking, designed for AWS Lambda.",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.632.0"
+  }
+}
